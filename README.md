@@ -1,7 +1,8 @@
 # mkv-x265-to-mp4-x264
 A simple Python script I made using ffmpeg to convert mkv x265 videos to web supported mp4 x264.  
 Usually the provess would be simple converting form mkv to mp4.  
-However, since the codec also needs to be switched since x265 is not supported on most browsers it's more work.
+However, since the codec also needs to be switched since x265 is not supported on most browsers it's more work.  
+Additionally, there are options for using subtitles and how many threads should be used.
 
 ## Install and Usage
 You will first need to install **ffmpeg** and make sure to setup the enviroment variable under PATH if it's not already.
