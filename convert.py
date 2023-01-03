@@ -8,8 +8,6 @@ subtitles = input('Use Subtitles? y/n ')
 if subtitles == 'y':
     subindex = input('Subtitle Index: ')
 
-audioStream = input('Audio stream index: ')
-
 threads = input('Number of threads: ')
 
 for mkv in mkv_list:
@@ -26,7 +24,7 @@ for mkv in mkv_list:
     if subtitles == 'y':
         try: #'-metadata:s:a:0 language=eng',
             subprocess.run(
-            ["ffmpeg","-y" ,"-i", f"{mkv}", '-map', '0:0', '-map', f'0:{audioStream}','-vf', f"subtitles={mkv}:stream_index={subindex}","-threads", f'{threads}', '-vcodec', 'libx264', '-acodec', 'aac', '-preset', 'medium', '-pix_fmt', 'yuv420p','-movflags', '+faststart', '-metadata:s:a:1','title=jpn', f"{output_name}"], check=True
+            ["ffmpeg","-y" ,"-i", f"{mkv}", '-map', '0:0', '-map', f'0:1','-vf', f"subtitles={mkv}:stream_index={subindex}","-threads", f'{threads}', '-vcodec', 'libx264', '-acodec', 'aac', '-preset', 'medium', '-pix_fmt', 'yuv420p','-movflags', '+faststart', '-metadata:s:a:1','title=jpn', f"{output_name}"], check=True
         )
         except:
             raise Exception(
@@ -36,7 +34,7 @@ for mkv in mkv_list:
     else:
         try:
             subprocess.run(
-            ["ffmpeg","-y" ,"-i", f"{mkv}",'-map', '0:0', '-map', f'0:{audioStream}',"-threads", f'{threads}', '-vcodec', 'libx264', '-acodec', 'aac', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', f"{output_name}"], check=True
+            ["ffmpeg","-y" ,"-i", f"{mkv}","-threads", f'{threads}', '-vcodec', 'libx264', '-acodec', 'aac', '-preset', 'medium', '-pix_fmt', 'yuv420p','-movflags', '+faststart', '-metadata:s:a:1','title=jpn', f"{output_name}"], check=True
         )
         except:
             raise Exception(
@@ -45,3 +43,4 @@ for mkv in mkv_list:
 
 
 print(f"{len(mkv_list)} video(s) converted to MP4!")
+
